@@ -9,10 +9,12 @@
     "lint:fix": "next lint --fix"
   },
   "dependencies": {
+    "clsx": "^2.0.0",
     "next": "13.4.12",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "socket.io": "^4.7.1"
+    "socket.io": "^4.7.1",
+    "tailwind-merge": "^1.14.0"
   },
   "devDependencies": {
     "@bluzzi/eslint-config": "^1.1.0",
@@ -30,6 +32,9 @@
     "extends": [
       "next/core-web-vitals",
       "@bluzzi"
+    ],
+    "ignorePatterns": [
+      "**/components/**/*.tsx"
     ]
   }
 }
