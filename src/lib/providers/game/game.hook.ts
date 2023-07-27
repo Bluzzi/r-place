@@ -6,10 +6,12 @@ import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { io } from "socket.io-client";
 import { GameContext } from "./game.context";
+import { useToast } from "#/lib/components/use-toast";
 
 export const useGame = (url: string): GameHookOutput => {
   // Hooks:
   const router = useRouter();
+  const { toast } = useToast();
 
   // Socket instance:
   const socket = io(url);
@@ -21,7 +23,14 @@ export const useGame = (url: string): GameHookOutput => {
 
   // Functions:
   const handleLogin: ServerToClientEvents["login"] = (success, messageHistory, pixelMap) => {
-    if (!success || !messageHistory || !pixelMap) return;
+    console.log(success, messageHistory, pixelMap);
+    if (!success || !messageHistory || !pixelMap) {
+      toast({
+        title: "Error!",
+        description: "Your username is already taken."
+      });
+      return;
+    }
 
     setIsLogin(true);
     setMessageHistory(messageHistory);
