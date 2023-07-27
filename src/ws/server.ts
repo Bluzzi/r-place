@@ -6,20 +6,26 @@ import { addMessageToHistory, messageHistory } from "./entities/message";
 import { isHexColor } from "#/lib/utils/color";
 import { updatePixel } from "./entities/pixel";
 import { pixelMap } from "./entities/pixel/pixel.map";
+import { createServer } from "http";
 
-const io = new Server<ClientToServerEvents, ServerToClientEvents, InterServerEvents>();
+const httpServer = createServer();
+const io = new Server<ClientToServerEvents, ServerToClientEvents, InterServerEvents>(httpServer, {
+  cors: {
+    origin: "http://localhost:3000"
+  }
+});
 
 const defaultCooldown = 5;
 
 io.on("connection", (socket) => {
-  socket.on("connect", (username) => {
+  socket.on("login", (username) => {
     if (isOnline(username)) {
-      socket.emit("connect", false);
+      socket.emit("login", false);
       return;
     }
 
     createConnection({ socket, username, cooldown: defaultCooldown });
-    socket.emit("connect", true, messageHistory, pixelMap);
+    socket.emit("login", true, messageHistory, pixelMap);
   });
 
   socket.on("message:send", (message) => {
@@ -45,6 +51,10 @@ io.on("connection", (socket) => {
     if (!isHexColor(hexColor)) return;
 
     updatePixel(x, y, hexColor, player.username);
+  });
+
+  socket.on("disconnect", () => {
+    // TODO
   });
 });
 

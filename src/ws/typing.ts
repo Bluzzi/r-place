@@ -5,7 +5,7 @@ import type { Pixel } from "./entities/pixel";
 export type Cooldown = number | "free";
 
 export type ServerToClientEvents = {
-  "connect": (success: boolean, messageHistory?: Message[], pixelMap?: Pixel[][]) => void;
+  "login": (success: boolean, messageHistory?: Message[], pixelMap?: Pixel[][]) => void;
 
   "message:received": (username: string, unixTimestamp: number, content: string) => void;
 
@@ -14,7 +14,7 @@ export type ServerToClientEvents = {
 }
 
 export type ClientToServerEvents = {
-  "connect": (username: string) => void;
+  "login": (username: string) => void;
 
   "message:send": (message: string) => void;
 

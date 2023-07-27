@@ -11,7 +11,7 @@ import {
 } from "react-hook-form"
 
 import { cn } from "#/lib/utils/tailwind"
-import { Label } from "#/lib/components/ui/label"
+import { Label } from "#/lib/components/label"
 
 const Form = FormProvider
 
@@ -133,7 +133,7 @@ const FormDescription = React.forwardRef<
     <p
       ref={ref}
       id={formDescriptionId}
-      className={cn("text-sm text-slate-500 dark:text-slate-400", className)}
+      className={cn("text-sm text-zinc-500 dark:text-zinc-400", className)}
       {...props}
     />
   )
