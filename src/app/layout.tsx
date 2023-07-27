@@ -1,5 +1,3 @@
-"use client";
-
 import "#/lib/styles/tailwind.css";
 import type { Component } from "#/lib/utils/component";
 import type { PropsWithChildren } from "react";
@@ -12,7 +10,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "r/place",
-  description: "Collaborative canvas - Unite to create art in this exciting game inspired by r/place. Work together and leave your mark!"
+  description: "Collaborative canvas - Unite to create art in this exciting game inspired by r/place. Work together and leave your mark!",
+  icons: "/logo.png"
 };
 
 const RootLayout: Component<PropsWithChildren> = ({ children }) => (
